@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azzam Fikri Aufa | Portofolio</title>
+<meta name="description" content="Portofolio Azzam Fikri Aufa — Electrical Engineering Technology Student, 3D Designer, Video Editor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e0e10;
+    --bg-2:#141417;
+    --card:#18181c;
+    --line:rgba(255,255,255,.08);
+    --text:#f2f0eb;
+    --muted:#9a9aa3;
+    --gold:#c9a96e;
+    --gold-soft:rgba(201,169,110,.12);
+    --radius:16px;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--bg);color:var(--text);
+    line-height:1.7;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .container{width:min(1120px,100% - 48px);margin-inline:auto}
+  section{padding:110px 0}
+  .eyebrow{
+    font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:14px;display:block;
+  }
+  h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:600;letter-spacing:-.02em;line-height:1.2}
+  .section-head{margin-bottom:56px;max-width:640px}
+  .section-head p{color:var(--muted);margin-top:14px}
+
+  /* NAV */
+  nav{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    transition:background .3s,border-color .3s,backdrop-filter .3s;
+    border-bottom:1px solid transparent;
+  }
+  nav.scrolled{background:rgba(14,14,16,.78);backdrop-filter:blur(14px);border-color:var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-weight:700;letter-spacing:.04em}
+  .logo span{color:var(--gold)}
+  .nav-links{display:flex;gap:34px;list-style:none}
+  .nav-links a{font-size:.9rem;color:var(--muted);transition:color .25s;position:relative}
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--gold);transition:width .3s var(--ease);
+  }
+  .nav-links a:hover{color:var(--text)}
+  .nav-links a:hover::after{width:100%}
+  .burger{display:none;background:none;border:0;cursor:pointer;width:32px;height:32px;position:relative}
+  .burger span{position:absolute;left:5px;right:5px;height:2px;background:var(--text);transition:.3s}
+  .burger span:nth-child(1){top:10px}.burger span:nth-child(2){top:20px}
+  .burger.open span:nth-child(1){top:15px;transform:rotate(45deg)}
+  .burger.open span:nth-child(2){top:15px;transform:rotate(-45deg)}
+
+  /* BUTTONS */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 30px;border-radius:999px;font-weight:500;font-size:.95rem;
+    border:1px solid transparent;cursor:pointer;font-family:inherit;
+    transition:transform .3s var(--ease),box-shadow .3s,background .3s,color .3s,border-color .3s;
+  }
+  .btn-primary{background:var(--gold);color:#111}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px -8px rgba(201,169,110,.55)}
+  .btn-ghost{border-color:rgba(255,255,255,.2);color:var(--text);background:transparent}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;width:640px;height:640px;right:-180px;top:-120px;
+    background:radial-gradient(circle,rgba(201,169,110,.16),transparent 65%);pointer-events:none;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:72px 72px;opacity:.35;
+    mask-image:radial-gradient(ellipse at 70% 30%,#000 0%,transparent 65%);
+    -webkit-mask-image:radial-gradient(ellipse at 70% 30%,#000 0%,transparent 65%);
+    pointer-events:none;
+  }
+  .hero .container{position:relative;z-index:1}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:10px;font-size:.82rem;color:var(--muted);
+    padding:8px 16px;border:1px solid var(--line);border-radius:999px;margin-bottom:28px;background:rgba(255,255,255,.02);
+  }
+  .hero-tag i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+  .hero h1{font-size:clamp(2.6rem,7vw,5.2rem);font-weight:700;letter-spacing:-.035em;line-height:1.05;max-width:900px}
+  .hero h1 em{font-style:normal;color:var(--gold)}
+  .tagline{margin-top:22px;font-size:clamp(1rem,2vw,1.2rem);color:var(--text);font-weight:500;opacity:.9}
+  .tagline b{color:var(--gold);font-weight:500;margin:0 6px}
+  .hero-desc{margin-top:20px;color:var(--muted);max-width:600px;font-size:1.05rem}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:42px}
+
+  /* ABOUT */
+  #about{background:var(--bg-2);border-block:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:center}
+  .about-text p{color:var(--muted);font-size:1.05rem;margin-top:20px}
+  .about-text p:first-of-type{margin-top:0}
+  .stats{display:grid;gap:16px}
+  .stat{
+    padding:24px 28px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);
+    transition:border-color .3s,transform .3s var(--ease);
+  }
+  .stat:hover{border-color:rgba(201,169,110,.5);transform:translateX(6px)}
+  .stat strong{display:block;font-size:1.05rem;font-weight:600}
+  .stat span{color:var(--muted);font-size:.9rem}
+
+  /* SKILLS */
+  .skill-block + .skill-block{margin-top:44px}
+  .skill-block h3{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:20px}
+  .chips{display:flex;flex-wrap:wrap;gap:12px}
+  .chip{
+    padding:12px 22px;border-radius:999px;border:1px solid var(--line);background:var(--card);
+    font-size:.92rem;transition:all .3s var(--ease);cursor:default;
+  }
+  .chip:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-soft);transform:translateY(-3px)}
+  .chips.soft .chip{background:transparent}
+
+  /* PORTFOLIO */
+  #portfolio{background:var(--bg-2);border-block:1px solid var(--line)}
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    transition:transform .45s var(--ease),border-color .3s,box-shadow .45s;
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-8px);border-color:rgba(201,169,110,.45);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+  /* Ganti background dengan gambar sendiri: style="background-image:url('gambar.jpg')" */
+  .thumb{
+    aspect-ratio:16/10;position:relative;overflow:hidden;
+    background-size:cover;background-position:center;
+    background-color:#202026;
+  }
+  .thumb.t1{background-image:linear-gradient(135deg,#23222a,#15151a 60%,#2a2418)}
+  .thumb.t2{background-image:linear-gradient(135deg,#1a2226,#141418 60%,#2a2418)}
+  .thumb svg{position:absolute;inset:0;margin:auto;width:84px;height:84px;stroke:var(--gold);fill:none;stroke-width:1.2;opacity:.8;transition:transform .6s var(--ease),opacity .3s}
+  .card:hover .thumb svg{transform:scale(1.15);opacity:1}
+  .thumb small{position:absolute;left:18px;bottom:14px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .card-body{padding:30px;display:flex;flex-direction:column;flex:1}
+  .card-body h3{font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
+  .card-body p{color:var(--muted);margin-top:10px;font-size:.96rem;flex:1}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .tags span{font-size:.75rem;padding:5px 12px;border-radius:999px;background:var(--gold-soft);color:var(--gold)}
+
+  .exp{margin-top:72px}
+  .exp h3{font-size:1.4rem;font-weight:600;margin-bottom:28px}
+  .timeline{border-left:1px solid var(--line);margin-left:6px}
+  .t-item{position:relative;padding:0 0 36px 36px}
+  .t-item:last-child{padding-bottom:0}
+  .t-item::before{
+    content:"";position:absolute;left:-6px;top:8px;width:11px;height:11px;border-radius:50%;
+    background:var(--bg-2);border:2px solid var(--gold);
+  }
+  .t-item time{font-size:.8rem;letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+  .t-item h4{font-size:1.1rem;font-weight:600;margin-top:4px}
+  .t-item p{color:var(--muted);margin-top:6px;max-width:620px}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .contact-info h2{margin-bottom:18px}
+  .contact-info p{color:var(--muted)}
+  .links{display:grid;gap:14px;margin-top:36px}
+  .link-row{
+    display:flex;align-items:center;gap:16px;padding:18px 22px;border:1px solid var(--line);border-radius:14px;background:var(--card);
+    transition:all .3s var(--ease);
+  }
+  .link-row:hover{border-color:var(--gold);transform:translateX(8px)}
+  .link-row svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.6;flex:none}
+  .link-row span{font-size:.92rem}
+  form{display:grid;gap:18px;padding:34px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+  label{font-size:.82rem;color:var(--muted);display:block;margin-bottom:8px}
+  input,textarea{
+    width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);
+    background:var(--bg);color:var(--text);font:inherit;transition:border-color .25s,box-shadow .25s;
+  }
+  input:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px var(--gold-soft)}
+  textarea{resize:vertical;min-height:140px}
+  .form-note{font-size:.82rem;color:var(--gold);min-height:1.2em}
+
+  footer{padding:32px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+
+  /* RESPONSIVE */
+  @media (max-width:900px){
+    section{padding:84px 0}
+    .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+    .cards{grid-template-columns:1fr}
+  }
+  @media (max-width:760px){
+    .burger{display:block}
+    .nav-links{
+      position:fixed;top:72px;left:0;right:0;flex-direction:column;gap:0;
+      background:rgba(14,14,16,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+      max-height:0;overflow:hidden;transition:max-height .4s var(--ease);
+    }
+    .nav-links.open{max-height:360px}
+    .nav-links a{display:block;padding:18px 24px;font-size:1rem}
+    .nav-links a::after{display:none}
+    .hero-cta .btn{width:100%;justify-content:center}
+    form{padding:24px}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">AFA<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#skills">Keahlian</a></li>
+      <li><a href="#portfolio">Portofolio</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Buka menu"><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="container">
+    <div class="hero-tag reveal"><i></i> Terbuka untuk kolaborasi</div>
+    <h1 class="reveal d1">Azzam Fikri <em>Aufa</em></h1>
+    <p class="tagline reveal d2">Electrical Engineering Technology Student <b>|</b> 3D Designer <b>|</b> Video Editor</p>
+    <p class="hero-desc reveal d3">Menggabungkan prinsip keteknikan dengan kreativitas visual untuk menciptakan desain infrastruktur dan karya multimedia yang fungsional.</p>
+    <div class="hero-cta reveal d4">
+      <a href="#portfolio" class="btn btn-primary">Lihat Portofolio
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#contact" class="btn btn-ghost">Hubungi Saya</a>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container about-grid">
+    <div class="about-text reveal">
+      <span class="eyebrow">Tentang Saya</span>
+      <h2>Teknik dan estetika dalam satu kerangka.</h2>
+      <p style="margin-top:24px">Mahasiswa D4 Teknologi Rekayasa Elektro di Universitas Gadjah Mada (UGM). Memiliki ketertarikan kuat pada instalasi kelistrikan bangunan serta visualisasi arsitektur.</p>
+      <p>Mampu beradaptasi dengan cepat dan senang berkolaborasi dalam tim.</p>
+    </div>
+    <div class="stats">
+      <div class="stat reveal d1"><strong>D4 Teknologi Rekayasa Elektro</strong><span>Universitas Gadjah Mada</span></div>
+      <div class="stat reveal d2"><strong>Instalasi Kelistrikan Bangunan</strong><span>Fokus ketertarikan teknis</span></div>
+      <div class="stat reveal d3"><strong>Visualisasi Arsitektur</strong><span>Pemodelan &amp; desain 3D</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Keahlian</span>
+      <h2>Alat dan kemampuan yang saya andalkan.</h2>
+    </div>
+    <div class="skill-block reveal">
+      <h3>Hard Skills</h3>
+      <div class="chips">
+        <span class="chip">SketchUp</span>
+        <span class="chip">Blender</span>
+        <span class="chip">Adobe Premiere Pro</span>
+        <span class="chip">Adobe Illustrator</span>
+        <span class="chip">Python Programming</span>
+        <span class="chip">2D/3D Design</span>
+      </div>
+    </div>
+    <div class="skill-block reveal d1">
+      <h3>Soft Skills</h3>
+      <div class="chips soft">
+        <span class="chip">Analytical Problem Solving</span>
+        <span class="chip">Team Collaboration</span>
+        <span class="chip">Technical Communication</span>
+        <span class="chip">Time Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Portofolio</span>
+      <h2>Proyek &amp; pengalaman terpilih.</h2>
+      <p>Perpaduan pemodelan teknis dan produksi visual.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card reveal">
+        <div class="thumb" style="background-image:url('Image(8)_upscale01.png')">
+          <path d="M32 6 54 18v28L32 58 10 46V18z"/><path d="M10 18l22 12 22-12M32 30v28"/></svg>
+          <small>Thumbnail Proyek</small>
+        </div>
+        <div class="card-body">
+          <h3>3D Architectural &amp; Locomotive Modeling</h3>
+          <p>Pemodelan 3D bangunan dan replika lokomotif kereta menggunakan Blender dan SketchUp.</p>
+          <div class="tags"><span>Blender</span><span>SketchUp</span><span>3D Modeling</span></div>
+        </div>
+      </article>
+
+      <article class="card reveal d1">
+        <div class="thumb" style="background-image:url('Screenshot 2026-10-19 22.34.53.png')">
+          <rect x="8" y="14" width="48" height="36" rx="4"/><path d="M27 25v14l12-7z"/></svg>
+          <small>Thumbnail Proyek</small>
+        </div>
+        <div class="card-body">
+          <h3>Multimedia Production</h3>
+          <p>Editing video untuk film pendek dan aftermovie PPSMB Pionir UGM, serta desain grafis.</p>
+          <div class="tags"><span>Premiere Pro</span><span>Illustrator</span><span>Video Editing</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="exp reveal">
+      <h3>Pengalaman</h3>
+      <div class="timeline">
+        <div class="t-item">
+          <time>2023 — 2025</time>
+          <h4>Freelance 3D Building Designer</h4>
+          <p>Membantu proyek arsitektur melalui pemodelan dan visualisasi 3D bangunan.</p>
+        </div>
+        <div class="t-item">
+          <time>Sekolah</time>
+          <h4>Talent / Event Organizer</h4>
+          <p>Terlibat sebagai talent dan penyelenggara acara sekolah.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container contact-grid">
+    <div class="contact-info reveal">
+      <span class="eyebrow">Kontak</span>
+      <h2>Mari berkolaborasi untuk proyek selanjutnya!</h2>
+      <p>Punya proyek, ide, atau sekadar ingin menyapa? Kirim pesan, saya akan membalas secepatnya.</p>
+      <div class="links">
+        <!-- GANTI link LinkedIn dan email di bawah ini -->
+        <a class="link-row" href="https://www.linkedin.com/in/azzam-fikri-aufa-145124436/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M4 9h4v11H4zM6 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM10 9h4v1.6C14.6 9.6 15.8 9 17.2 9 20 9 21 10.8 21 14v6h-4v-5.4c0-1.4-.4-2.1-1.5-2.1-1.2 0-1.5.9-1.5 2.1V20h-4z"/></svg>
+          <span>linkedin.com/in/azzam-fikri-aufa-145124436/</span>
+        </a>
+        <a class="link-row" href="mailto:azzamfikri865@gmail.com">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <span>azzamfikri865@gmail.com</span>
+        </a>
+      </div>
+    </div>
+
+    <form id="contactForm" class="reveal d1">
+      <div><label for="name">Nama</label><input id="name" name="name" type="text" required placeholder="Nama lengkap"></div>
+      <div><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="nama@email.com"></div>
+      <div><label for="message">Pesan</label><textarea id="message" name="message" required placeholder="Ceritakan proyek Anda..."></textarea></div>
+      <button type="submit" class="btn btn-primary" style="justify-content:center">Kirim Pesan</button>
+      <div class="form-note" id="formNote"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">© <span id="year"></span> Azzam Fikri Aufa. Seluruh hak cipta dilindungi.</div>
+</footer>
+
+<script>
+  // Navbar background on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const links = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open'); links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); links.classList.remove('open');
+  }));
+
+  // Fade-in on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Contact form -> membuka aplikasi email (ganti TO_EMAIL dengan email Anda)
+  const TO_EMAIL = 'azzamfikri865@gmail.com';
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = e.target;
+    const subject = encodeURIComponent('Pesan dari portofolio: ' + f.name.value);
+    const body = encodeURIComponent(f.message.value + '\n\n— ' + f.name.value + ' (' + f.email.value + ')');
+    window.location.href = `mailto:${TO_EMAIL}?subject=${subject}&body=${body}`;
+    document.getElementById('formNote').textContent = 'Membuka aplikasi email Anda...';
+    f.reset();
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
