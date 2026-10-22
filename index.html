@@ -129,23 +129,59 @@
   .slideshow .dots button.on{background:var(--gold);width:22px;border-radius:999px}
   @media (hover:none){.slideshow .s-btn{opacity:1}}
 
-  /* HERO — ANIMASI PETIR */
-  #lightning{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-  .flash{
-    position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;
-    background:radial-gradient(ellipse at 72% 22%,rgba(170,214,255,.32),rgba(77,163,255,.08) 45%,transparent 70%);
+  /* LOADING INTRO */
+  html.is-loading,html.is-loading body{overflow:hidden}
+  #loader{position:fixed;inset:0;z-index:200;display:grid;place-items:center;cursor:pointer}
+  .ld-panel{position:absolute;left:0;right:0;height:50.3%;background:#0a0a0c;transition:transform 1.05s cubic-bezier(.76,0,.24,1)}
+  .ld-panel.top{top:0;border-bottom:1px solid rgba(77,163,255,.55)}
+  .ld-panel.bottom{bottom:0;border-top:1px solid rgba(77,163,255,.55)}
+  #loader.done .ld-panel.top{transform:translateY(-102%)}
+  #loader.done .ld-panel.bottom{transform:translateY(102%)}
+  .ld-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:20px;transition:opacity .45s ease,transform .8s var(--ease)}
+  #loader.done .ld-center{opacity:0;transform:scale(1.18)}
+  .ld-svg{width:min(250px,62vw);height:auto;overflow:visible}
+  .ld-ring-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:1}
+  .ld-ring{fill:none;stroke:var(--gold);stroke-width:1.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 4px var(--gold))}
+  .ld-spark{fill:#e6f3ff;filter:drop-shadow(0 0 5px var(--gold)) drop-shadow(0 0 12px var(--gold))}
+  .ld-float{animation:ldfloat 3s ease-in-out 1.7s infinite}
+  @keyframes ldfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .ld-edge{fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:lddraw 1s var(--ease) forwards;filter:drop-shadow(0 0 3px rgba(77,163,255,.7))}
+  .ld-e1{animation-delay:.15s}.ld-e2{animation-delay:.6s}.ld-e3{animation-delay:.85s}
+  @keyframes lddraw{to{stroke-dashoffset:0}}
+  .ld-face{opacity:0;animation:ldface .8s ease forwards}
+  .ld-top{fill:rgba(170,214,255,.34);animation-delay:1s}
+  .ld-left{fill:rgba(77,163,255,.22);animation-delay:1.2s}
+  .ld-right{fill:rgba(77,163,255,.10);animation-delay:1.4s}
+  @keyframes ldface{to{opacity:1}}
+  .ld-pct{font-size:.78rem;letter-spacing:.3em;color:var(--muted);font-variant-numeric:tabular-nums;min-width:4ch;text-align:center}
+  .ld-name{
+    font-size:.72rem;letter-spacing:.8em;text-transform:uppercase;color:var(--gold);font-weight:600;
+    opacity:0;animation:ldname 1.2s var(--ease) .5s forwards;margin-right:-.8em;
   }
-  .flash.on{animation:flash .55s ease-out}
-  @keyframes flash{
-    0%{opacity:0}8%{opacity:1}18%{opacity:.25}30%{opacity:.8}100%{opacity:0}
+  @keyframes ldname{from{opacity:0;letter-spacing:1.1em}to{opacity:1;letter-spacing:.5em}}
+
+  /* HERO — ANIMASI ELEGAN */
+  .aurora{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .aurora i{
+    position:absolute;border-radius:50%;filter:blur(90px);opacity:.0;
+    animation:drift 22s ease-in-out infinite, fadein 2.4s ease forwards;
   }
-  .hero h1 em{animation:zap 5s ease-in-out infinite}
-  @keyframes zap{
-    0%,86%,100%{text-shadow:0 0 0 rgba(77,163,255,0)}
-    90%{text-shadow:0 0 22px rgba(170,214,255,.95),0 0 60px rgba(77,163,255,.7)}
-    93%{text-shadow:0 0 6px rgba(77,163,255,.4)}
-    96%{text-shadow:0 0 30px rgba(170,214,255,.8),0 0 70px rgba(77,163,255,.5)}
+  .aurora i:nth-child(1){width:520px;height:520px;right:-120px;top:-80px;background:rgba(77,163,255,.30)}
+  .aurora i:nth-child(2){width:420px;height:420px;left:-140px;bottom:-60px;background:rgba(120,110,255,.20);animation-duration:28s,2.4s;animation-delay:-8s,.4s}
+  .aurora i:nth-child(3){width:300px;height:300px;left:42%;top:30%;background:rgba(170,214,255,.14);animation-duration:34s,2.4s;animation-delay:-15s,.8s}
+  @keyframes fadein{to{opacity:1}}
+  @keyframes drift{
+    0%,100%{transform:translate(0,0) scale(1)}
+    33%{transform:translate(-50px,40px) scale(1.12)}
+    66%{transform:translate(40px,-30px) scale(.94)}
   }
+  .hero h1 em{
+    background:linear-gradient(100deg,var(--gold) 0%,var(--gold) 38%,#d6ebff 50%,var(--gold) 62%,var(--gold) 100%);
+    background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    animation:shimmer 6s ease-in-out infinite;
+  }
+  @keyframes shimmer{0%,30%{background-position:120% 0}70%,100%{background-position:-60% 0}}
   .hero-tag i{animation:pulse 2.2s ease-in-out infinite}
   @keyframes pulse{0%,100%{box-shadow:0 0 8px var(--gold)}50%{box-shadow:0 0 20px 3px var(--gold)}}
   .hero .btn-primary{position:relative;overflow:hidden}
@@ -272,10 +308,120 @@
     .hero-cta .btn{width:100%;justify-content:center}
     form{padding:24px}
   }
+  /* ====== ANIMASI DINAMIS SELURUH HALAMAN ====== */
+  /* progress scroll */
+  #progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:90;transform-origin:left;transform:scaleX(0);
+    background:linear-gradient(90deg,var(--gold),#cfe8ff);box-shadow:0 0 12px var(--gold);pointer-events:none}
+  /* cahaya kursor */
+  #cursorGlow{position:fixed;top:0;left:0;width:520px;height:520px;z-index:45;pointer-events:none;opacity:0;
+    background:radial-gradient(circle,rgba(77,163,255,.10),transparent 62%);transition:opacity .5s;will-change:transform}
+  #cursorGlow.on{opacity:1}
+  /* menu aktif */
+  .nav-links a.active{color:var(--text)}
+  .nav-links a.active::after{width:100%}
+  /* parallax hero */
+  .hero .container{transform:translateY(var(--py,0px));opacity:var(--po,1);will-change:transform,opacity}
+  .aurora{transform:translateY(var(--ay,0px))}
+  /* petunjuk scroll */
+  .scroll-cue{position:absolute;left:50%;bottom:26px;z-index:1;width:22px;height:38px;margin-left:-11px;
+    border:1px solid rgba(255,255,255,.25);border-radius:12px;opacity:.85}
+  .scroll-cue::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:8px;margin-left:-1.5px;border-radius:3px;
+    background:var(--gold);box-shadow:0 0 8px var(--gold);animation:cue 1.9s var(--ease) infinite}
+  @keyframes cue{0%{transform:translateY(0);opacity:0}25%{opacity:1}80%{transform:translateY(14px);opacity:0}100%{opacity:0}}
+  /* marquee keahlian */
+  .marquee{border-top:1px solid var(--line);background:var(--bg);overflow:hidden;padding:22px 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+  .marquee-track{display:flex;width:max-content;animation:marq 38s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  .mq-group{display:flex;flex:none}
+  .mq-group span{display:flex;align-items:center;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-left:48px;transition:color .3s}
+  .mq-group span::after{content:"";width:6px;height:6px;margin-left:48px;background:var(--gold);transform:rotate(45deg);opacity:.7}
+  .mq-group span:hover{color:var(--text)}
+  @keyframes marq{to{transform:translateX(-50%)}}
+  /* judul per kata */
+  .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
+  .w>span{display:inline-block;transform:translateY(112%);transition:transform .95s var(--ease) calc(var(--i,0)*70ms + 150ms)}
+  .reveal.in .w>span{transform:none}
+  /* eyebrow dengan garis tumbuh */
+  .eyebrow{display:flex;align-items:center;gap:14px}
+  .eyebrow::before{content:"";height:1px;width:0;background:var(--gold);box-shadow:0 0 8px var(--gold);transition:width 1s var(--ease) .3s}
+  .reveal.in .eyebrow::before{width:36px}
+  /* chip, tag, link: muncul berurutan */
+  .reveal.in .chip,.reveal.in .tags span,.reveal.in .link-row{animation:popIn .75s var(--ease) backwards;animation-delay:calc(var(--i,0)*70ms + 250ms)}
+  @keyframes popIn{from{opacity:0;transform:translateY(18px) scale(.94)}}
+  /* timeline menggambar diri */
+  .timeline{border-left:0;position:relative}
+  .timeline::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;transform-origin:top;transform:scaleY(0);
+    background:linear-gradient(var(--gold),rgba(255,255,255,.08));transition:transform 1.6s var(--ease) .3s}
+  .reveal.in .timeline::before{transform:none}
+  .reveal.in .t-item{animation:itemIn .9s var(--ease) backwards;animation-delay:calc(var(--i,0)*350ms + 500ms)}
+  @keyframes itemIn{from{opacity:0;transform:translateX(-18px)}}
+  .reveal.in .t-item::before{animation:dotPop .7s var(--ease) backwards,ring 2.8s ease-out infinite;animation-delay:calc(var(--i,0)*350ms + 500ms),calc(var(--i,0)*350ms + 1.5s)}
+  @keyframes dotPop{from{transform:scale(0)}}
+  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(77,163,255,.55)}100%{box-shadow:0 0 0 13px rgba(77,163,255,0)}}
+  /* spotlight mengikuti kursor di kartu */
+  .card,.stat,.link-row{position:relative;isolation:isolate}
+  .card::before,.stat::before,.link-row::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(77,163,255,.16),transparent 45%)}
+  .card:hover::before,.stat:hover::before,.link-row:hover::before{opacity:1}
+  .link-row svg{transition:transform .4s var(--ease)}
+  .link-row:hover svg{transform:scale(1.18) rotate(-8deg)}
+  /* tombol magnetik + ripple */
+  .btn{position:relative;overflow:hidden;translate:var(--bx,0px) var(--by,0px);
+    transition:transform .3s var(--ease),box-shadow .3s,background .3s,color .3s,border-color .3s,translate .3s var(--ease)}
+  .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.38);transform:scale(0);animation:ripple .75s ease-out forwards;pointer-events:none}
+  @keyframes ripple{to{transform:scale(1);opacity:0}}
+  /* form */
+  form>div label{transition:color .25s,transform .25s var(--ease)}
+  form>div:focus-within label{color:var(--gold);transform:translateX(4px)}
+  /* kembali ke atas */
+  #toTop{position:fixed;right:24px;bottom:24px;z-index:60;width:48px;height:48px;border:0;border-radius:50%;background:rgba(20,20,23,.85);
+    backdrop-filter:blur(10px);cursor:pointer;display:grid;place-items:center;opacity:0;transform:translateY(16px) scale(.85);pointer-events:none;
+    transition:opacity .4s,transform .5s var(--ease),box-shadow .3s}
+  #toTop.show{opacity:1;transform:none;pointer-events:auto}
+  #toTop:hover{box-shadow:0 0 22px -2px rgba(77,163,255,.7)}
+  #toTop svg{position:absolute;inset:0;width:100%;height:100%}
+  #toTop .tt-bg{fill:none;stroke:rgba(255,255,255,.12);stroke-width:2}
+  #toTop .tt-bar{fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+  #toTop .tt-arrow{position:relative;width:16px;height:16px;fill:none;stroke:var(--text);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s var(--ease)}
+  #toTop:hover .tt-arrow{transform:translateY(-3px)}
+  @media (max-width:760px){.scroll-cue{display:none}#toTop{right:16px;bottom:16px}}
+  @media (prefers-reduced-motion:reduce){
+    .w>span{transform:none}
+    .timeline::before{transform:none}
+    .eyebrow::before{width:36px}
+    .marquee-track{transform:none}
+  }
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add('is-loading')</script>
+<noscript><style>#loader{display:none}html.is-loading,html.is-loading body{overflow:auto}.reveal{opacity:1;transform:none}</style></noscript>
+<div id="loader" aria-hidden="true">
+  <div class="ld-panel top"></div>
+  <div class="ld-panel bottom"></div>
+  <div class="ld-center">
+    <svg class="ld-svg" viewBox="0 0 200 200">
+      <circle class="ld-ring-bg" cx="100" cy="100" r="88"/>
+      <circle class="ld-ring" id="ldRing" cx="100" cy="100" r="88" pathLength="1" transform="rotate(-90 100 100)"/>
+      <circle class="ld-spark" id="ldSpark" r="3.4" cx="100" cy="12"/>
+      <g class="ld-float"><g transform="translate(0,6)">
+        <polygon class="ld-face ld-top" points="100,48 140,71 100,94 60,71"/>
+        <polygon class="ld-face ld-left" points="60,71 100,94 100,140 60,117"/>
+        <polygon class="ld-face ld-right" points="100,94 140,71 140,117 100,140"/>
+        <path class="ld-edge ld-e1" pathLength="1" d="M100 48 L140 71 L140 117 L100 140 L60 117 L60 71 Z"/>
+        <path class="ld-edge ld-e2" pathLength="1" d="M60 71 L100 94 L140 71"/>
+        <path class="ld-edge ld-e3" pathLength="1" d="M100 94 L100 140"/>
+      </g></g>
+    </svg>
+    <div class="ld-pct" id="ldPct">0%</div>
+    <div class="ld-name">Azzam Fikri Aufa</div>
+  </div>
+</div>
 
+<div id="progress" aria-hidden="true"></div>
+<div id="cursorGlow" aria-hidden="true"></div>
 <nav id="nav">
   <div class="container nav-inner">
     <a href="#home" class="logo">AFA<span>.</span></a>
@@ -291,8 +437,7 @@
 
 <!-- HERO -->
 <header class="hero" id="home">
-  <canvas id="lightning" aria-hidden="true"></canvas>
-  <div class="flash" id="flash" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="container">
     <div class="hero-tag reveal"><i></i> </div>
     <h1 class="reveal d1">Azzam Fikri <em>Aufa</em></h1>
@@ -305,7 +450,11 @@
       <a href="#contact" class="btn btn-ghost">Hubungi Saya</a>
     </div>
   </div>
+  <div class="scroll-cue" aria-hidden="true"></div>
 </header>
+
+<!-- MARQUEE KEAHLIAN -->
+<div class="marquee" aria-hidden="true"><div class="marquee-track"><div class="mq-group"><span>SketchUp</span><span>Blender</span><span>Adobe Premiere Pro</span><span>Adobe Illustrator</span><span>Python Programming</span><span>2D/3D Design</span><span>Instalasi Kelistrikan Bangunan</span><span>Visualisasi Arsitektur</span></div><div class="mq-group"><span>SketchUp</span><span>Blender</span><span>Adobe Premiere Pro</span><span>Adobe Illustrator</span><span>Python Programming</span><span>2D/3D Design</span><span>Instalasi Kelistrikan Bangunan</span><span>Visualisasi Arsitektur</span></div></div></div>
 
 <!-- ABOUT -->
 <section id="about">
@@ -418,6 +567,7 @@
       <h2>Mari berkolaborasi untuk proyek selanjutnya!</h2>
       <p>Punya proyek, ide, atau sekadar ingin menyapa? Kirim pesan, saya akan membalas secepatnya.</p>
       <div class="links">
+        <!-- GANTI link LinkedIn dan email di bawah ini -->
         <a class="link-row" href="https://www.linkedin.com/in/azzam-fikri-aufa-145124436/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M4 9h4v11H4zM6 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM10 9h4v1.6C14.6 9.6 15.8 9 17.2 9 20 9 21 10.8 21 14v6h-4v-5.4c0-1.4-.4-2.1-1.5-2.1-1.2 0-1.5.9-1.5 2.1V20h-4z"/></svg>
           <span>linkedin.com/in/azzam-fikri-aufa-145124436/</span>
@@ -443,6 +593,11 @@
   <div class="container">© <span id="year"></span> Azzam Fikri Aufa. Seluruh hak cipta dilindungi.</div>
 </footer>
 
+<button id="toTop" type="button" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 48 48"><circle class="tt-bg" cx="24" cy="24" r="22"/><circle class="tt-bar" id="ttBar" cx="24" cy="24" r="22" pathLength="1" transform="rotate(-90 24 24)"/></svg>
+  <svg class="tt-arrow" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
 <script>
   // Navbar background on scroll
   const nav = document.getElementById('nav');
@@ -463,7 +618,11 @@
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  let revealStarted = false;
+  function startReveal(){
+    if (revealStarted) return; revealStarted = true;
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
 
   // Contact form -> membuka aplikasi email (ganti TO_EMAIL dengan email Anda)
   const TO_EMAIL = 'azzamfikri865@gmail.com';
@@ -523,96 +682,136 @@
     });
   })();
 
-  // Animasi petir di hero
+  // Intro loading: kubus 3D tergambar, ring progres terisi, lalu tirai terbelah membuka halaman
   (function(){
-    const hero = document.getElementById('home');
-    const cv = document.getElementById('lightning');
-    const flash = document.getElementById('flash');
-    const ctx = cv.getContext('2d');
+    const root = document.documentElement;
+    const loader = document.getElementById('loader');
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return;
-    let W, H, dpr, bolts = [], particles = [], visible = true;
+    let finished = false;
+    function finish(){
+      if (finished) return; finished = true;
+      loader.classList.add('done');
+      setTimeout(startReveal, 650);                    // konten hero muncul saat tirai terbuka
+      setTimeout(() => { loader.remove(); root.classList.remove('is-loading'); }, 1300);
+    }
+    if (reduce || !loader){ if (loader) loader.remove(); root.classList.remove('is-loading'); startReveal(); return; }
 
-    function resize(){
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = hero.clientWidth; H = hero.clientHeight;
-      cv.width = W * dpr; cv.height = H * dpr;
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-    }
-    resize(); window.addEventListener('resize', resize);
-    new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(hero);
+    const ring = document.getElementById('ldRing');
+    const spark = document.getElementById('ldSpark');
+    const pct = document.getElementById('ldPct');
+    const DUR = 2900, t0 = performance.now();
+    const ease = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2;
+    let loaded = document.readyState === 'complete';
+    window.addEventListener('load', () => { loaded = true; });
 
-    // Buat jalur petir bercabang (midpoint displacement)
-    function segment(x1,y1,x2,y2,disp,out){
-      if (disp < 4){ out.push([x1,y1,x2,y2]); return; }
-      const mx = (x1+x2)/2 + (Math.random()-.5)*disp;
-      const my = (y1+y2)/2 + (Math.random()-.5)*disp*.4;
-      segment(x1,y1,mx,my,disp/2,out);
-      segment(mx,my,x2,y2,disp/2,out);
+    function tick(now){
+      let p = Math.min((now - t0) / DUR, 1);
+      if (p >= 1 && !loaded) p = .995;                 // tunggu semua aset selesai dimuat
+      const e = ease(p);
+      ring.style.strokeDashoffset = 1 - e;
+      const a = -Math.PI/2 + e * Math.PI*2;
+      spark.setAttribute('cx', 100 + 88*Math.cos(a));
+      spark.setAttribute('cy', 100 + 88*Math.sin(a));
+      pct.textContent = Math.round(e*100) + '%';
+      if (p >= 1) { setTimeout(finish, 280); return; }
+      requestAnimationFrame(tick);
     }
-    function makeBolt(){
-      const sx = W * (.35 + Math.random()*.6), sy = -10;
-      const ex = sx + (Math.random()-.5)*W*.35, ey = H * (.45 + Math.random()*.5);
-      const main = []; segment(sx,sy,ex,ey,H*.22,main);
-      const branches = [];
-      const n = 2 + Math.floor(Math.random()*3);
-      for (let i=0;i<n;i++){
-        const s = main[Math.floor(main.length*(.25+Math.random()*.5))];
-        const bx = s[2] + (Math.random()<.5?-1:1)*(60+Math.random()*140);
-        const by = s[3] + 80 + Math.random()*160;
-        const b = []; segment(s[2],s[3],bx,by,70,b); branches.push(b);
-      }
-      bolts.push({main,branches,life:1});
-      for (let i=0;i<14;i++){
-        const p = main[Math.floor(Math.random()*main.length)];
-        particles.push({x:p[2],y:p[3],vx:(Math.random()-.5)*3,vy:(Math.random()-.5)*3-.5,life:1});
-      }
-      flash.classList.remove('on'); void flash.offsetWidth; flash.classList.add('on');
-    }
-    function stroke(segs,w,alpha,color){
-      ctx.beginPath();
-      segs.forEach(s => { ctx.moveTo(s[0],s[1]); ctx.lineTo(s[2],s[3]); });
-      ctx.lineWidth = w; ctx.strokeStyle = color.replace('A',alpha); ctx.stroke();
-    }
-    function frame(){
-      requestAnimationFrame(frame);
-      if (!visible) return;
-      ctx.clearRect(0,0,W,H);
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      bolts = bolts.filter(b => b.life > 0);
-      bolts.forEach(b => {
-        const f = b.life * (Math.random() > .85 ? .6 : 1); // efek kedip
-        ctx.shadowColor = 'rgba(77,163,255,'+f+')'; ctx.shadowBlur = 24;
-        stroke(b.main,5,f*.35,'rgba(77,163,255,A)');
-        stroke(b.main,2,f,'rgba(190,225,255,A)');
-        b.branches.forEach(br => {
-          stroke(br,3,f*.3,'rgba(77,163,255,A)');
-          stroke(br,1.2,f*.85,'rgba(190,225,255,A)');
-        });
-        ctx.shadowBlur = 0;
-        b.life -= .035;
+    requestAnimationFrame(tick);
+    loader.addEventListener('click', finish);          // klik untuk melewati intro
+    setTimeout(finish, 9000);                          // pengaman
+  })();
+
+  // Animasi dinamis seluruh halaman
+  (function(){
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+    // judul: kata naik satu per satu
+    document.querySelectorAll('.section-head h2,.about-text h2,.contact-info h2,.exp h3').forEach(h => {
+      const words = h.textContent.trim().split(/\s+/);
+      h.textContent = '';
+      words.forEach((w,i) => {
+        const o = document.createElement('span'); o.className = 'w'; o.style.setProperty('--i', i);
+        const n = document.createElement('span'); n.textContent = w; o.appendChild(n);
+        h.appendChild(o); h.appendChild(document.createTextNode(' '));
       });
-      particles = particles.filter(p => p.life > 0);
-      particles.forEach(p => {
-        p.x += p.vx; p.y += p.vy; p.vy += .06; p.life -= .03;
-        ctx.fillStyle = 'rgba(170,214,255,'+Math.max(p.life,0)+')';
-        ctx.fillRect(p.x,p.y,2,2);
-      });
-    }
-    frame();
+    });
 
-    // Petir pertama sesaat setelah halaman dibuka, lalu acak
-    function schedule(first){
-      setTimeout(() => {
-        if (visible){
-          makeBolt();
-          if (Math.random() < .4) setTimeout(makeBolt, 140); // sambaran ganda
-        }
-        schedule(false);
-      }, first ? 900 : 2200 + Math.random()*3200);
+    // indeks urutan untuk animasi berjenjang
+    [['.chips','.chip'],['.timeline','.t-item'],['.tags','span'],['.links','.link-row']].forEach(([c,i]) => {
+      document.querySelectorAll(c).forEach(box => box.querySelectorAll(':scope > '+i).forEach((el,k) => el.style.setProperty('--i', k)));
+    });
+    document.querySelectorAll('.chips').forEach((box,b) => box.querySelectorAll('.chip').forEach((el,k) => el.style.setProperty('--i', k)));
+
+    // progress scroll, tombol ke atas, parallax hero
+    const bar = document.getElementById('progress');
+    const toTop = document.getElementById('toTop');
+    const ttBar = document.getElementById('ttBar');
+    const hero = document.getElementById('home');
+    const heroBox = hero.querySelector('.container');
+    const aurora = hero.querySelector('.aurora');
+    let ticking = false;
+    function update(){
+      ticking = false;
+      const y = window.scrollY, max = Math.max(document.documentElement.scrollHeight - innerHeight, 1);
+      const p = Math.min(y / max, 1);
+      bar.style.transform = 'scaleX(' + p + ')';
+      ttBar.style.strokeDashoffset = 1 - p;
+      toTop.classList.toggle('show', y > 600);
+      if (!reduce && y < innerHeight * 1.2){
+        heroBox.style.setProperty('--py', (y * .16) + 'px');
+        heroBox.style.setProperty('--po', Math.max(1 - y / (innerHeight * .85), 0));
+        aurora.style.setProperty('--ay', (y * .3) + 'px');
+      }
     }
-    schedule(true);
-    hero.addEventListener('click', e => { if (!e.target.closest('a,button')) makeBolt(); });
+    window.addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(update); } }, {passive:true});
+    window.addEventListener('resize', update); update();
+    toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+    // menu aktif sesuai bagian yang sedang dilihat
+    const navLinks = [...document.querySelectorAll('.nav-links a')];
+    const spy = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+    }), {rootMargin:'-45% 0px -50% 0px'});
+    ['about','skills','portfolio','contact'].forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
+    new IntersectionObserver(es => { if (es[0].isIntersecting) navLinks.forEach(a => a.classList.remove('active')); }).observe(hero);
+
+    // ripple pada tombol
+    document.querySelectorAll('.btn').forEach(b => b.addEventListener('click', e => {
+      const r = b.getBoundingClientRect(), d = Math.max(r.width, r.height) * 2;
+      const s = document.createElement('span'); s.className = 'ripple';
+      s.style.cssText = 'width:'+d+'px;height:'+d+'px;left:'+(e.clientX - r.left - d/2)+'px;top:'+(e.clientY - r.top - d/2)+'px';
+      b.appendChild(s); setTimeout(() => s.remove(), 800);
+    }));
+
+    if (!fine || reduce) return;
+
+    // spotlight kartu mengikuti kursor
+    document.querySelectorAll('.card,.stat,.link-row').forEach(el => el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px'); el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }));
+
+    // tombol magnetik
+    document.querySelectorAll('.btn').forEach(b => {
+      b.addEventListener('pointermove', e => {
+        const r = b.getBoundingClientRect();
+        b.style.setProperty('--bx', ((e.clientX - r.left - r.width/2) * .18) + 'px');
+        b.style.setProperty('--by', ((e.clientY - r.top - r.height/2) * .28) + 'px');
+      });
+      b.addEventListener('pointerleave', () => { b.style.setProperty('--bx','0px'); b.style.setProperty('--by','0px'); });
+    });
+
+    // cahaya halus yang mengikuti kursor
+    const glow = document.getElementById('cursorGlow');
+    let tx = innerWidth/2, ty = innerHeight/2, cx = tx, cy = ty;
+    window.addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; glow.classList.add('on'); }, {passive:true});
+    document.addEventListener('pointerleave', () => glow.classList.remove('on'));
+    (function loop(){
+      cx += (tx - cx) * .12; cy += (ty - cy) * .12;
+      glow.style.transform = 'translate3d(' + (cx - 260) + 'px,' + (cy - 260) + 'px,0)';
+      requestAnimationFrame(loop);
+    })();
   })();
 </script>
 </body>
