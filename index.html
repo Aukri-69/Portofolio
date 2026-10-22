@@ -16,8 +16,8 @@
     --line:rgba(255,255,255,.08);
     --text:#f2f0eb;
     --muted:#9a9aa3;
-    --gold:#c9a96e;
-    --gold-soft:rgba(201,169,110,.12);
+    --gold:#4da3ff;
+    --gold-soft:rgba(77,163,255,.12);
     --radius:16px;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
@@ -72,7 +72,7 @@
     transition:transform .3s var(--ease),box-shadow .3s,background .3s,color .3s,border-color .3s;
   }
   .btn-primary{background:var(--gold);color:#111}
-  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px -8px rgba(201,169,110,.55)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px -8px rgba(77,163,255,.55)}
   .btn-ghost{border-color:rgba(255,255,255,.2);color:var(--text);background:transparent}
   .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
 
@@ -82,7 +82,7 @@
   }
   .hero::before{
     content:"";position:absolute;width:640px;height:640px;right:-180px;top:-120px;
-    background:radial-gradient(circle,rgba(201,169,110,.16),transparent 65%);pointer-events:none;
+    background:radial-gradient(circle,rgba(77,163,255,.16),transparent 65%);pointer-events:none;
   }
   .hero::after{
     content:"";position:absolute;inset:0;
@@ -105,6 +105,57 @@
   .hero-desc{margin-top:20px;color:var(--muted);max-width:600px;font-size:1.05rem}
   .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:42px}
 
+  /* SLIDESHOW 3D */
+  .slideshow .slide{
+    position:absolute;inset:0;background-size:cover;background-position:center;
+    opacity:0;transform:scale(1.06);transition:opacity .9s ease,transform 5s ease-out;
+  }
+  .slideshow .slide.active{opacity:1;transform:scale(1)}
+  .slideshow .s-btn{
+    position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+    width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
+    background:rgba(14,14,16,.55);backdrop-filter:blur(6px);color:var(--text);
+    font-size:1.4rem;line-height:1;cursor:pointer;opacity:0;
+    transition:opacity .3s,border-color .3s,color .3s;
+  }
+  .slideshow .prev{left:12px}.slideshow .next{right:12px}
+  .slideshow:hover .s-btn,.slideshow .s-btn:focus-visible{opacity:1}
+  .slideshow .s-btn:hover{border-color:var(--gold);color:var(--gold)}
+  .slideshow .dots{position:absolute;left:0;right:0;bottom:12px;z-index:2;display:flex;justify-content:center;gap:8px}
+  .slideshow .dots button{
+    width:8px;height:8px;border-radius:50%;border:0;padding:0;cursor:pointer;
+    background:rgba(255,255,255,.4);transition:background .3s,width .3s var(--ease);
+  }
+  .slideshow .dots button.on{background:var(--gold);width:22px;border-radius:999px}
+  @media (hover:none){.slideshow .s-btn{opacity:1}}
+
+  /* HERO — ANIMASI PETIR */
+  #lightning{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  .flash{
+    position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;
+    background:radial-gradient(ellipse at 72% 22%,rgba(170,214,255,.32),rgba(77,163,255,.08) 45%,transparent 70%);
+  }
+  .flash.on{animation:flash .55s ease-out}
+  @keyframes flash{
+    0%{opacity:0}8%{opacity:1}18%{opacity:.25}30%{opacity:.8}100%{opacity:0}
+  }
+  .hero h1 em{animation:zap 5s ease-in-out infinite}
+  @keyframes zap{
+    0%,86%,100%{text-shadow:0 0 0 rgba(77,163,255,0)}
+    90%{text-shadow:0 0 22px rgba(170,214,255,.95),0 0 60px rgba(77,163,255,.7)}
+    93%{text-shadow:0 0 6px rgba(77,163,255,.4)}
+    96%{text-shadow:0 0 30px rgba(170,214,255,.8),0 0 70px rgba(77,163,255,.5)}
+  }
+  .hero-tag i{animation:pulse 2.2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 8px var(--gold)}50%{box-shadow:0 0 20px 3px var(--gold)}}
+  .hero .btn-primary{position:relative;overflow:hidden}
+  .hero .btn-primary::after{
+    content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-20deg);animation:sweep 4s ease-in-out infinite;
+  }
+  @keyframes sweep{0%,60%{left:-60%}100%{left:130%}}
+
   /* ABOUT */
   #about{background:var(--bg-2);border-block:1px solid var(--line)}
   .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:center}
@@ -115,7 +166,7 @@
     padding:24px 28px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);
     transition:border-color .3s,transform .3s var(--ease);
   }
-  .stat:hover{border-color:rgba(201,169,110,.5);transform:translateX(6px)}
+  .stat:hover{border-color:rgba(77,163,255,.5);transform:translateX(6px)}
   .stat strong{display:block;font-size:1.05rem;font-weight:600}
   .stat span{color:var(--muted);font-size:.9rem}
 
@@ -138,7 +189,7 @@
     transition:transform .45s var(--ease),border-color .3s,box-shadow .45s;
     display:flex;flex-direction:column;
   }
-  .card:hover{transform:translateY(-8px);border-color:rgba(201,169,110,.45);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+  .card:hover{transform:translateY(-8px);border-color:rgba(77,163,255,.45);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
   /* Ganti background dengan gambar sendiri: style="background-image:url('gambar.jpg')" */
   .thumb{
     aspect-ratio:16/10;position:relative;overflow:hidden;
@@ -240,8 +291,10 @@
 
 <!-- HERO -->
 <header class="hero" id="home">
+  <canvas id="lightning" aria-hidden="true"></canvas>
+  <div class="flash" id="flash" aria-hidden="true"></div>
   <div class="container">
-    <div class="hero-tag reveal"><i></i> Terbuka untuk kolaborasi</div>
+    <div class="hero-tag reveal"><i></i> </div>
     <h1 class="reveal d1">Azzam Fikri <em>Aufa</em></h1>
     <p class="tagline reveal d2">Electrical Engineering Technology Student <b>|</b> 3D Designer <b>|</b> Video Editor</p>
     <p class="hero-desc reveal d3">Menggabungkan prinsip keteknikan dengan kreativitas visual untuk menciptakan desain infrastruktur dan karya multimedia yang fungsional.</p>
@@ -312,9 +365,13 @@
 
     <div class="cards">
       <article class="card reveal">
-        <div class="thumb" style="background-image:url('Image(8)_upscale01.png')">
-          <path d="M32 6 54 18v28L32 58 10 46V18z"/><path d="M10 18l22 12 22-12M32 30v28"/></svg>
-          <small>Thumbnail Proyek</small>
+        <div class="thumb slideshow" id="slideshow3d" style="background-image:url('Image(8)_upscale01.png')">
+          <!-- Ganti nama file slide ke-2 di bawah ini dengan gambar Anda (PNG/JPG di folder yang sama) -->
+          <div class="slide active" data-src="Image(8)_upscale01.png"></div>
+          <div class="slide" data-src="Screenshot 2026-10-22 16.12.18.png"></div>
+          <button class="s-btn prev" type="button" aria-label="Gambar sebelumnya">&#8249;</button>
+          <button class="s-btn next" type="button" aria-label="Gambar berikutnya">&#8250;</button>
+          <div class="dots"></div>
         </div>
         <div class="card-body">
           <h3>3D Architectural &amp; Locomotive Modeling</h3>
@@ -326,11 +383,10 @@
       <article class="card reveal d1">
         <div class="thumb" style="background-image:url('Screenshot 2026-10-19 22.34.53.png')">
           <rect x="8" y="14" width="48" height="36" rx="4"/><path d="M27 25v14l12-7z"/></svg>
-          <small>Thumbnail Proyek</small>
         </div>
         <div class="card-body">
           <h3>Multimedia Production</h3>
-          <p>Editing video untuk film pendek dan aftermovie PPSMB Pionir UGM, serta desain grafis.</p>
+          <p>Editing video untuk film pendek dan aftermovie Pionir UGM, serta desain grafis.</p>
           <div class="tags"><span>Premiere Pro</span><span>Illustrator</span><span>Video Editing</span></div>
         </div>
       </article>
@@ -362,7 +418,6 @@
       <h2>Mari berkolaborasi untuk proyek selanjutnya!</h2>
       <p>Punya proyek, ide, atau sekadar ingin menyapa? Kirim pesan, saya akan membalas secepatnya.</p>
       <div class="links">
-        <!-- GANTI link LinkedIn dan email di bawah ini -->
         <a class="link-row" href="https://www.linkedin.com/in/azzam-fikri-aufa-145124436/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M4 9h4v11H4zM6 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM10 9h4v1.6C14.6 9.6 15.8 9 17.2 9 20 9 21 10.8 21 14v6h-4v-5.4c0-1.4-.4-2.1-1.5-2.1-1.2 0-1.5.9-1.5 2.1V20h-4z"/></svg>
           <span>linkedin.com/in/azzam-fikri-aufa-145124436/</span>
@@ -423,6 +478,142 @@
   });
 
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Slideshow proyek 3D (slide yang gambarnya tidak ditemukan dilewati otomatis)
+  (function(){
+    const box = document.getElementById('slideshow3d');
+    if (!box) return;
+    const all = [...box.querySelectorAll('.slide')];
+    const dotsWrap = box.querySelector('.dots');
+    let slides = [], dots = [], i = 0, timer;
+
+    function show(n){
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s,k) => s.classList.toggle('active', k === i));
+      dots.forEach((d,k) => d.classList.toggle('on', k === i));
+    }
+    function restart(){
+      clearInterval(timer);
+      if (slides.length > 1) timer = setInterval(() => show(i + 1), 4500);
+    }
+    function init(){
+      slides = all.filter(s => s.dataset.ok === '1');
+      if (!slides.length) return;
+      slides.forEach((s,k) => {
+        s.style.backgroundImage = "url('" + s.dataset.src + "')";
+        const d = document.createElement('button');
+        d.type = 'button'; d.setAttribute('aria-label', 'Gambar ' + (k+1));
+        d.addEventListener('click', () => { show(k); restart(); });
+        dotsWrap.appendChild(d); dots.push(d);
+      });
+      all.forEach(s => { if (!slides.includes(s)) s.remove(); });
+      if (slides.length < 2) box.querySelectorAll('.s-btn').forEach(b => b.style.display = 'none');
+      box.querySelector('.prev').addEventListener('click', () => { show(i - 1); restart(); });
+      box.querySelector('.next').addEventListener('click', () => { show(i + 1); restart(); });
+      box.addEventListener('mouseenter', () => clearInterval(timer));
+      box.addEventListener('mouseleave', restart);
+      show(0); restart();
+    }
+    let pending = all.length;
+    all.forEach(s => {
+      const im = new Image();
+      im.onload = () => { s.dataset.ok = '1'; if (!--pending) init(); };
+      im.onerror = () => { if (!--pending) init(); };
+      im.src = s.dataset.src;
+    });
+  })();
+
+  // Animasi petir di hero
+  (function(){
+    const hero = document.getElementById('home');
+    const cv = document.getElementById('lightning');
+    const flash = document.getElementById('flash');
+    const ctx = cv.getContext('2d');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    let W, H, dpr, bolts = [], particles = [], visible = true;
+
+    function resize(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = hero.clientWidth; H = hero.clientHeight;
+      cv.width = W * dpr; cv.height = H * dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    resize(); window.addEventListener('resize', resize);
+    new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(hero);
+
+    // Buat jalur petir bercabang (midpoint displacement)
+    function segment(x1,y1,x2,y2,disp,out){
+      if (disp < 4){ out.push([x1,y1,x2,y2]); return; }
+      const mx = (x1+x2)/2 + (Math.random()-.5)*disp;
+      const my = (y1+y2)/2 + (Math.random()-.5)*disp*.4;
+      segment(x1,y1,mx,my,disp/2,out);
+      segment(mx,my,x2,y2,disp/2,out);
+    }
+    function makeBolt(){
+      const sx = W * (.35 + Math.random()*.6), sy = -10;
+      const ex = sx + (Math.random()-.5)*W*.35, ey = H * (.45 + Math.random()*.5);
+      const main = []; segment(sx,sy,ex,ey,H*.22,main);
+      const branches = [];
+      const n = 2 + Math.floor(Math.random()*3);
+      for (let i=0;i<n;i++){
+        const s = main[Math.floor(main.length*(.25+Math.random()*.5))];
+        const bx = s[2] + (Math.random()<.5?-1:1)*(60+Math.random()*140);
+        const by = s[3] + 80 + Math.random()*160;
+        const b = []; segment(s[2],s[3],bx,by,70,b); branches.push(b);
+      }
+      bolts.push({main,branches,life:1});
+      for (let i=0;i<14;i++){
+        const p = main[Math.floor(Math.random()*main.length)];
+        particles.push({x:p[2],y:p[3],vx:(Math.random()-.5)*3,vy:(Math.random()-.5)*3-.5,life:1});
+      }
+      flash.classList.remove('on'); void flash.offsetWidth; flash.classList.add('on');
+    }
+    function stroke(segs,w,alpha,color){
+      ctx.beginPath();
+      segs.forEach(s => { ctx.moveTo(s[0],s[1]); ctx.lineTo(s[2],s[3]); });
+      ctx.lineWidth = w; ctx.strokeStyle = color.replace('A',alpha); ctx.stroke();
+    }
+    function frame(){
+      requestAnimationFrame(frame);
+      if (!visible) return;
+      ctx.clearRect(0,0,W,H);
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      bolts = bolts.filter(b => b.life > 0);
+      bolts.forEach(b => {
+        const f = b.life * (Math.random() > .85 ? .6 : 1); // efek kedip
+        ctx.shadowColor = 'rgba(77,163,255,'+f+')'; ctx.shadowBlur = 24;
+        stroke(b.main,5,f*.35,'rgba(77,163,255,A)');
+        stroke(b.main,2,f,'rgba(190,225,255,A)');
+        b.branches.forEach(br => {
+          stroke(br,3,f*.3,'rgba(77,163,255,A)');
+          stroke(br,1.2,f*.85,'rgba(190,225,255,A)');
+        });
+        ctx.shadowBlur = 0;
+        b.life -= .035;
+      });
+      particles = particles.filter(p => p.life > 0);
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.vy += .06; p.life -= .03;
+        ctx.fillStyle = 'rgba(170,214,255,'+Math.max(p.life,0)+')';
+        ctx.fillRect(p.x,p.y,2,2);
+      });
+    }
+    frame();
+
+    // Petir pertama sesaat setelah halaman dibuka, lalu acak
+    function schedule(first){
+      setTimeout(() => {
+        if (visible){
+          makeBolt();
+          if (Math.random() < .4) setTimeout(makeBolt, 140); // sambaran ganda
+        }
+        schedule(false);
+      }, first ? 900 : 2200 + Math.random()*3200);
+    }
+    schedule(true);
+    hero.addEventListener('click', e => { if (!e.target.closest('a,button')) makeBolt(); });
+  })();
 </script>
 </body>
 </html>
