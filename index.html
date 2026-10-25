@@ -206,6 +206,42 @@
   .stat strong{display:block;font-size:1.05rem;font-weight:600}
   .stat span{color:var(--muted);font-size:.9rem}
 
+  /* FOTO PROFIL — TENTANG SAYA */
+  .about-side{display:grid;gap:22px}
+  .photo{position:relative;width:min(100%,420px);margin-inline:auto;aspect-ratio:1/1.05}
+  .photo-glow{position:absolute;inset:-14%;z-index:0;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(77,163,255,.28),transparent 62%);filter:blur(26px);animation:photoGlow 6s ease-in-out infinite}
+  @keyframes photoGlow{0%,100%{opacity:.55;transform:scale(.96)}50%{opacity:1;transform:scale(1.06)}}
+  .photo-frame{position:absolute;inset:0;z-index:1;border-radius:var(--radius);overflow:hidden;background:var(--card);
+    border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(0,0,0,.85)}
+  .photo-frame::before{content:"";position:absolute;inset:-60%;z-index:0;
+    background:conic-gradient(from 0deg,transparent 0 70%,rgba(77,163,255,.55) 86%,transparent 100%);animation:photoSpin 7s linear infinite}
+  .photo-frame::after{content:"";position:absolute;inset:1px;z-index:1;border-radius:calc(var(--radius) - 1px);background:var(--card)}
+  .photo-img{position:absolute;inset:1px;z-index:2;width:calc(100% - 2px);height:calc(100% - 2px);object-fit:cover;object-position:center 22%;
+    border-radius:calc(var(--radius) - 1px);transform:scale(1.12);filter:saturate(.9) contrast(1.03);
+    clip-path:inset(100% 0 0 0);transition:transform 1.8s var(--ease),filter .6s}
+  .photo-img.ready{display:block}
+  .reveal.in .photo-img.ready{clip-path:inset(0 0 0 0);transform:scale(1);transition:clip-path 1.3s cubic-bezier(.76,0,.24,1) .25s,transform 1.8s var(--ease) .25s,filter .6s}
+  .photo:hover .photo-img.ready{transform:scale(1.045);filter:saturate(1.05) contrast(1.05)}
+  .photo-mono{position:absolute;inset:1px;z-index:2;display:none;place-items:center;border-radius:calc(var(--radius) - 1px);
+    background:linear-gradient(135deg,#1c1f27,#14141a 60%,#10151f);font-size:clamp(3rem,9vw,4.6rem);font-weight:700;letter-spacing:.06em;color:var(--gold);
+    text-shadow:0 0 28px rgba(77,163,255,.6)}
+  .photo.nophoto .photo-mono{display:grid}
+  .photo.nophoto .photo-img{display:none}
+  .photo-sheen{position:absolute;inset:1px;z-index:3;border-radius:calc(var(--radius) - 1px);pointer-events:none;overflow:hidden}
+  .photo-sheen::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);transform:skewX(-20deg);animation:photoSheen 6.5s ease-in-out 2s infinite}
+  @keyframes photoSheen{0%,55%{left:-60%}100%{left:140%}}
+  @keyframes photoSpin{to{transform:rotate(360deg)}}
+  .corner{position:absolute;z-index:4;width:26px;height:26px;border:2px solid var(--gold);pointer-events:none;opacity:0;
+    filter:drop-shadow(0 0 6px rgba(77,163,255,.7));transition:opacity .5s ease 1.2s,transform .9s var(--ease) 1.2s}
+  .corner.tl{top:-9px;left:-9px;border-right:0;border-bottom:0;border-top-left-radius:10px;transform:translate(10px,10px)}
+  .corner.tr{top:-9px;right:-9px;border-left:0;border-bottom:0;border-top-right-radius:10px;transform:translate(-10px,10px)}
+  .corner.bl{bottom:-9px;left:-9px;border-right:0;border-top:0;border-bottom-left-radius:10px;transform:translate(10px,-10px)}
+  .corner.br{bottom:-9px;right:-9px;border-left:0;border-top:0;border-bottom-right-radius:10px;transform:translate(-10px,-10px)}
+  .reveal.in .corner{opacity:1;transform:none}
+  @media (max-width:900px){.photo{width:min(100%,360px);margin-inline:0}}
+
   /* SKILLS */
   .skill-block + .skill-block{margin-top:44px}
   .skill-block h3{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:20px}
@@ -465,10 +501,23 @@
       <p style="margin-top:24px">Mahasiswa D4 Teknologi Rekayasa Elektro di Universitas Gadjah Mada (UGM). Memiliki ketertarikan kuat pada instalasi kelistrikan bangunan serta visualisasi arsitektur.</p>
       <p>Mampu beradaptasi dengan cepat dan senang berkolaborasi dalam tim.</p>
     </div>
-    <div class="stats">
-      <div class="stat reveal d1"><strong>D4 Teknologi Rekayasa Elektro</strong><span>Universitas Gadjah Mada</span></div>
-      <div class="stat reveal d2"><strong>Instalasi Kelistrikan Bangunan</strong><span>Fokus ketertarikan teknis</span></div>
-      <div class="stat reveal d3"><strong>Visualisasi Arsitektur</strong><span>Pemodelan &amp; desain 3D</span></div>
+    <div class="about-side">
+      <!-- FOTO: taruh file foto di folder yang sama dengan index.html dan beri nama foto-azzam.jpg (juga dikenali: .jpeg / .png / .webp) -->
+      <figure class="photo reveal d1" id="aboutPhoto">
+        <div class="photo-glow" aria-hidden="true"></div>
+        <div class="photo-frame">
+          <div class="photo-mono" aria-hidden="true">AFA</div>
+          <img class="photo-img" id="aboutPhotoImg" alt="Foto Azzam Fikri Aufa" decoding="async">
+          <div class="photo-sheen" aria-hidden="true"></div>
+        </div>
+        <i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i>
+        <i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i>
+      </figure>
+      <div class="stats">
+        <div class="stat reveal d1"><strong>D4 Teknologi Rekayasa Elektro</strong><span>Universitas Gadjah Mada</span></div>
+        <div class="stat reveal d2"><strong>Instalasi Kelistrikan Bangunan</strong><span>Fokus ketertarikan teknis</span></div>
+        <div class="stat reveal d3"><strong>Visualisasi Arsitektur</strong><span>Pemodelan &amp; desain 3D</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -812,6 +861,21 @@
       glow.style.transform = 'translate3d(' + (cx - 260) + 'px,' + (cy - 260) + 'px,0)';
       requestAnimationFrame(loop);
     })();
+  })();
+
+  // Foto profil: coba beberapa ekstensi; jika tidak ada, tampil monogram AFA
+  (function(){
+    const box = document.getElementById('aboutPhoto');
+    const img = document.getElementById('aboutPhotoImg');
+    if (!box || !img) return;
+    const names = ['foto-azzam.jpg','foto-azzam.jpeg','foto-azzam.png','foto-azzam.webp'];
+    let k = 0;
+    img.addEventListener('load', () => { img.classList.add('ready'); box.classList.remove('nophoto'); });
+    img.addEventListener('error', () => {
+      k++;
+      if (k < names.length) img.src = names[k]; else box.classList.add('nophoto');
+    });
+    img.src = names[0];
   })();
 </script>
 </body>
